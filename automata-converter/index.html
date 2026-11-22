@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mealy ⇄ Moore Machine Lab</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Mealy <span>⇄</span> Moore Machine Converter Stimulation</h1>
+    </div>
+    <div class="header-actions">
+      <button class="ghost" id="demoBtn">Load example</button>
+      <button class="primary" id="convertBtn">Convert<span>→</span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="toolbar">
+      <div class="mode-wrap">
+        <div class="segmented">
+          <button class="mode active" data-mode="mealy">Mealy</button>
+          <button class="mode" data-mode="moore">Moore</button>
+        </div>
+      </div>
+      <div class="tool-group">
+        <span class="small-label">BUILD</span>
+        <button class="tool" id="addStateBtn">＋ Add state</button>
+        <button class="tool" id="connectBtn">↗ Connect states</button>
+        <button class="tool" id="initialBtn">◎ Set initial</button>
+        <button class="tool danger" id="deleteBtn">⌫ Delete selected</button>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <article class="panel">
+        <div class="panel-head">
+          <div><span class="step-tag">01</span><h2>Your machine</h2></div>
+          <span class="panel-sub" id="sourceType">MEALY MACHINE</span>
+        </div>
+        <div class="canvas-wrap">
+          <svg id="sourceSvg" class="machine-canvas" viewBox="0 0 700 430" aria-label="Source machine canvas"></svg>
+          <div class="canvas-empty" id="emptyHint">Drop a state here<br><small>or use ＋ Add state</small></div>
+        </div>
+        <div class="canvas-foot">
+          <span><i class="dot initial-dot"></i> Initial state</span>
+          <span><i class="dot selected-dot"></i> Selected state</span>
+          <span id="connectStatus">Click “Connect states” to create a transition.</span>
+        </div>
+      </article>
+
+      <article class="panel result-panel">
+        <div class="panel-head">
+          <div><span class="step-tag">02</span><h2>Converted machine</h2></div>
+          <span class="panel-sub" id="targetType">MOORE MACHINE</span>
+        </div>
+        <div class="canvas-wrap">
+          <svg id="resultSvg" class="machine-canvas" viewBox="0 0 700 430" aria-label="Converted machine canvas"></svg>
+          <div class="canvas-empty" id="resultEmpty">Your converted machine<br><small>will appear here</small></div>
+        </div>
+        <div class="canvas-foot"><span id="resultSummary">Waiting for conversion</span></div>
+      </article>
+    </section>
+
+    <section class="learning">
+      <div class="learning-head">
+        <div><span class="step-tag">03</span><h2>Conversion walkthrough</h2></div>
+        <div class="walk-controls">
+          <button class="tool" id="prevBtn" disabled>← Previous</button>
+          <button class="primary" id="nextBtn" disabled>Next step →</button>
+          <button class="tool" id="autoBtn" disabled>▶ Auto play</button>
+        </div>
+      </div>
+      <div class="progress"><div id="progressFill"></div></div>
+      <div class="walk-content">
+        <div class="walk-copy">
+          <div class="step-count" id="stepCount">STEP 0 / 0</div>
+          <h3 id="walkTitle">Ready when you are</h3>
+          <p id="walkText">Create a machine or load the example, then click Convert machine. You can move through the algorithm one step at a time.</p>
+        </div>
+        <div class="table-wrap">
+          <div class="table-title" id="tableTitle">Transition table</div>
+          <div id="tableArea" class="table-area"><span class="muted">The conversion table will appear here.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="help-row">
+      <div><b>How to connect:</b> click <em>Connect states</em>, select the source state, then select the destination. Enter the input and output when prompted.</div>
+      <div><b>Tip:</b> double-click a state to rename it or edit its Moore output.</div>
+    </section>
+  </main>
+  <footer>Automata Theory Learning Tool <span>·</span> Mealy ⇄ Moore conversion</footer>
+  <script src="script.js"></script>
+</body>
+</html>
